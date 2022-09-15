@@ -49,6 +49,9 @@ def browser(config_browser, config_wait_time):
     else:
         raise Exception(f'"{config_browser}" is not a supported browser')
 
+    # Open browser window to fullscreen
+    driver.maximize_window()
+
     # Wait implicitly for elements to be ready before attempting interaction
     driver.implicitly_wait(config_wait_time)
 
