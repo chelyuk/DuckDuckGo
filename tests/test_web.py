@@ -11,32 +11,15 @@ from selenium import webdriver
 from pages.search import DuckDuckGoSearchPage
 from pages.result import DuckDuckGoResultPage
 
-@pytest.fixture
-def browser():
-    # Initialize ChromeDriver
-    driver = webdriver.Chrome(ChromeDriverManager().install())
-    driver.maximize_window()
-
-    # Wait implicitly for elements zto be ready before attemping interactions
-    driver.implicitly_wait(5)
-
-    # Return the driver object at the end of setup
-    yield driver
-
-    driver.find_element
-    # For cleanup. quit the driver
-    driver.quit()
 
 def test_basic_duckduckgo_search(browser):
-    
     PHRASE = 'panda'
 
     search_page = DuckDuckGoSearchPage(browser)
     search_page.load()
     search_page.search(PHRASE)
-    
+
     result_page = DuckDuckGoResultPage(browser)
     assert result_page.link_div_count() > 0
     assert result_page.phrase_result_count(PHRASE) > 0
     assert result_page.search_input_value() == PHRASE
-    
